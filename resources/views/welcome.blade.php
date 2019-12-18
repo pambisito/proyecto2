@@ -85,7 +85,8 @@
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
+                    <a href="<?=route('articulo.index')?>">Mostrar artículos</a>
+                    <a href="<?=route('articulo.create')?>">Registrar artículo</a>
                 </div>
             </div>
         </div>
