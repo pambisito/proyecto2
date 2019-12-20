@@ -17,7 +17,7 @@
 
                                 <!-- Right Side Of Navbar -->
                                 <ul class="navbar-nav ml-auto">
-                                <a href="" class="btn btn-primary left">Comprar</a>
+                                <a href="<?=route('tienda.index')?>" class="btn btn-primary btn-sm left">Tienda</a>
                                 </ul>
                             </div>
                         </div>
