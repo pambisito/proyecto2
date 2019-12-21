@@ -30,7 +30,7 @@
                                     <td>{{ $item->precioUnidad }}</td>
                                     <td>{{ $item->stock }}</td>
                                     <td>
-                                        <a href="<?=route('tienda.create')?>" class="btn btn-primary btn-sm">Comprar</a>
+                                        <a href="<?=route('tienda.edit', $item->codArticulo)?>" class="btn btn-primary btn-sm">Comprar</a>
                                     </td>
                                 </tr>
                                 @endforeach

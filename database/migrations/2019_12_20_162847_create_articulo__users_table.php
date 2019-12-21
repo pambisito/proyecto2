@@ -14,8 +14,9 @@ class CreateArticuloUsersTable extends Migration
     public function up()
     {
         Schema::create('articulo__users', function (Blueprint $table) {
-            $table->integer('codArticulo')->unique();
-            $table->integer('codCliente')->unique();
+            $table->integer('codArticulo');
+            $table->integer('codCliente');
+            $table->unique(['codArticulo', 'codCliente']);
             $table->foreign('codArticulo')->references('codArticulo')->on('articulos')->onDelete('cascade');
             $table->foreign('codCliente')->references('codCliente')->on('users')->onDelete('cascade');
             $table->timestamps();

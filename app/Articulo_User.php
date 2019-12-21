@@ -8,5 +8,6 @@ class Articulo_User extends Model
 {
     protected $primaryKey = 'codArticulo';
 
-    protected $incrementing = false;
+    public $incrementing = false;
+
 }

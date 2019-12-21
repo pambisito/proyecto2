@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Articulo;
+use App\Articulo_User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\QueryException;
 
 class ComprarController extends Controller
 {
@@ -23,10 +26,18 @@ class ComprarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-        return back();
+    public function create($codArticulo, $codCliente)
+    {   
+        /* $compra = Articulo_User::firstOrCreate(['codArticulo' => $codArticulo],['codCliente' => $codCliente]); */
+
+        
+            $compra = new Articulo_User;
+            $compra->codArticulo = $codArticulo;
+            $compra->codCliente = $codCliente;
+            $compra->save();
+        
+
+        
     }
 
     /**
@@ -59,7 +70,24 @@ class ComprarController extends Controller
      */
     public function edit($id)
     {
-        //
+        $articuloComprar = Articulo::findOrFail($id);
+        $codCliente = Auth::user()->codCliente;
+        try {
+            $this->create($articuloComprar->codArticulo, $codCliente);
+        } catch(QueryException $e) {
+            return view('articulo.registrar');
+        }
+        /* 
+        if($articuloComprar->stock <= 0) {
+            echo "ya no disponible";
+        } else {
+            $articuloComprar->stock = $articuloComprar->stock - 1;
+            $articuloComprar->save();
+        } */
+
+        /* echo $id;
+        echo Auth::user()->codCliente; */
+        return back();
     }
 
     /**
