@@ -68,14 +68,16 @@ class ComprarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $articuloComprar = Articulo::findOrFail($id);
-        $codCliente = Auth::user()->codCliente;
+    public function edit($id) {
         try {
+            $articuloComprar = Articulo::findOrFail($id);
+            $codCliente = Auth::user()->codCliente;
             $this->create($articuloComprar->codArticulo, $codCliente);
+            $mensaje = "Compra realizada con éxito";
         } catch(QueryException $e) {
-            return view('articulo.registrar');
+            $mensaje = "Ya posee este artículo";
+            //return view('articulo.registrar');
+            
         }
         /* 
         if($articuloComprar->stock <= 0) {
@@ -87,7 +89,7 @@ class ComprarController extends Controller
 
         /* echo $id;
         echo Auth::user()->codCliente; */
-        return back();
+        return back()->with('mensaje', $mensaje);
     }
 
     /**

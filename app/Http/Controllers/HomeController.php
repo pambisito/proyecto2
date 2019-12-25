@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Articulo_User;
+use App\Articulo;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $misArticulos = Articulo_User::where('codCliente', Auth::user()->codCliente)->get();
+        $articulos = array();
+        foreach ($misArticulos as $item) {
+            $articulos[] = Articulo::findOrFail($item->codArticulo);
+        }
+
+        return view('auth.home', compact('articulos'));
     }
 }

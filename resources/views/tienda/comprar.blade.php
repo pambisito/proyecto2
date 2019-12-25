@@ -21,6 +21,30 @@
                                 <th scope="col">Acción</th>
                                 </tr>
                             </thead>
+                            @if(session('mensaje'))
+                                <?php
+                                if(session('mensaje') == "Ya posee este artículo") {
+                                    echo "<div class=\"alert alert-danger\" role=\"alert\">";
+                                        echo session('mensaje');
+
+                                        echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+                                                <span aria-hidden=\"true\">&times;</span>
+                                            </button>";
+
+                                    echo "</div>";
+                                } else {
+                                    echo "<div class=\"alert alert-success\" role=\"alert\">";
+                                        echo session('mensaje');
+
+                                        echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+                                                <span aria-hidden=\"true\">&times;</span>
+                                            </button>";
+
+                                    echo "</div>";
+                                }
+                                ?>
+                            
+                            @endif
                             <tbody>
                                 @foreach ($articulos as $item)
                                 <tr>
